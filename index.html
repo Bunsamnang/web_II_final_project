@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Movie Explorer</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  </head>
+  <body class="bg-gray-100 text-gray-900">
+    <header
+      class="bg-gray-900 text-white p-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4"
+    >
+      <!-- Title -->
+      <h1 class="text-2xl font-bold">🎬 Movie Explorer</h1>
+
+      <!-- Search bar -->
+      <div class="relative w-full w-40 sm:w-72">
+        <!-- Input with search icon inside -->
+        <input
+          id="searchInput"
+          type="text"
+          placeholder="Search movies..."
+          class=":w-full bg-gray-800 text-white placeholder-gray-400 border border-gray-700 rounded-md px-2 py-2 focus:outline-none focus:ring-1 focus:ring-blue-500"
+        />
+        <!-- Search icon -->
+        <button id="searchBtn" class="cursor-pointer">🔍</button>
+      </div>
+    </header>
+
+    <nav
+      class="bg-gray-800 text-white flex flex-wrap justify-center gap-3 py-3"
+    >
+      <button
+        class="nav-btn bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded-lg font-medium transition"
+        data-category="popular"
+      >
+        Popular
+      </button>
+      <button
+        class="nav-btn bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded-lg font-medium transition"
+        data-category="top_rated"
+      >
+        Top Rated
+      </button>
+      <button
+        class="nav-btn bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded-lg font-medium transition"
+        data-category="upcoming"
+      >
+        Latest
+      </button>
+      <button
+        id="favoritesBtn"
+        class="nav-btn bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded-lg font-medium transition"
+      >
+        Favorites ❤️
+      </button>
+    </nav>
+
+    <main class="p-4 bg-gray-800">
+      <div
+        id="moviesContainer"
+        class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
+      ></div>
+      <div id="loading" class="text-center py-6 hidden">Loading...</div>
+      <div id="error" class="text-center py-6 text-red-500 hidden">
+        Oops! Something went wrong.
+      </div>
+    </main>
+
+    <div
+      id="movieModal"
+      class="fixed inset-0 bg-black bg-opacity-70 hidden justify-center items-center p-4 z-50"
+    >
+      <div
+        class="bg-white rounded-lg shadow-lg max-w-2xl w-full overflow-auto max-h-[90vh]"
+      >
+        <div class="p-4 flex justify-between items-center border-b">
+          <h2 id="modalTitle" class="text-xl font-semibold"></h2>
+          <button
+            id="closeModal"
+            class="text-gray-600 hover:text-red-500 text-xl"
+          >
+            &times;
+          </button>
+        </div>
+        <div id="modalContent" class="p-4 space-y-4"></div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
