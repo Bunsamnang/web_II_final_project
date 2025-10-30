@@ -69,9 +69,12 @@ function renderMovies(movies, append = false) {
 
   const html = movies
     .map((movie) => {
-      const imageUrl = movie.poster_path
-        ? `${IMG_URL}/${movie.poster_path}`
-        : "https://via.placeholder.com/500x750?text=No+Image";
+      const imageTag = movie.poster_path
+        ? `<img src="${`${IMG_URL}/${movie.poster_path}`}" alt="${
+            movie.title
+          }" class="w-full h-full object-cover" />`
+        : `<img src="fallback.jpg" class="w-full h-full object-cover" />`;
+
       const movieUrl = `https://www.themoviedb.org/movie/${movie.id}`;
       const rating = movie.vote_average || 0;
       const description = movie.overview || "No description available.";
@@ -79,47 +82,43 @@ function renderMovies(movies, append = false) {
       const isFav = favorites.some((f) => f.id === movie.id);
 
       return `
-        <div class="relative group overflow-hidden rounded-lg shadow-lg hover:scale-[1.03] transition-transform duration-300">
-          <img
-            src="${imageUrl}"
-            alt="${movie.title}"
-            class="w-full h-96 object-cover"
-          />
+      <div class="relative group overflow-hidden rounded-lg shadow-lg hover:scale-[1.03] transition-transform duration-300 aspect-[9/16]">
+        ${imageTag}
 
-          <!-- ❤️ Favorite Button -->
-          <button
-            data-id="${movie.id}"
-            data-title="${movie.title}"
-            data-poster_path="${movie.poster_path}"
-            data-overview="${description}"
-            data-release_date="${releaseDate}"
-            data-vote_average="${movie.vote_average}"
-            class="absolute top-3 right-3 z-10 w-10 h-10 flex items-center justify-center rounded-full bg-black/60 text-white hover:bg-red-600 transition-all duration-200 cursor-pointer fav-btn"
-          >
-            ${isFav ? "❤️" : "🤍"}
-          </button>
+        <!-- ❤️ Favorite Button -->
+        <button
+          data-id="${movie.id}"
+          data-title="${movie.title}"
+          data-poster_path="${movie.poster_path}"
+          data-overview="${description}"
+          data-release_date="${releaseDate}"
+          data-vote_average="${movie.vote_average}"
+          class="absolute top-3 right-3 z-10 w-10 h-10 flex items-center justify-center rounded-full bg-black/60 text-white hover:bg-red-600 transition-all duration-200 cursor-pointer fav-btn"
+        >
+          ${isFav ? "❤️" : "🤍"}
+        </button>
 
-          <!-- Overlay -->
-          <a
-            href="${movieUrl}"
-            target="_blank"
-            class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4 text-white"
-          >
-            <h3 class="text-lg font-semibold mb-1">${movie.title}</h3>
-            <div class="flex justify-between text-sm mb-1 text-gray-200">
-              <p>${releaseDate}</p>
-              <p>${rating.toFixed(1)} ⭐</p>
-            </div>
-            <p class="text-sm text-gray-300 line-clamp-3">
-              ${
-                description.length > 100
-                  ? description.slice(0, 100) + "..."
-                  : description
-              }
-            </p>
-          </a>
-        </div>
-      `;
+        <!-- Overlay -->
+        <a
+          href="${movieUrl}"
+          target="_blank"
+          class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4 text-white"
+        >
+          <h3 class="text-lg font-semibold mb-1">${movie.title}</h3>
+          <div class="flex justify-between text-sm mb-1 text-gray-200">
+            <p>${releaseDate}</p>
+            <p>${rating.toFixed(1)} ⭐</p>
+          </div>
+          <p class="text-sm text-gray-300 line-clamp-3">
+            ${
+              description.length > 100
+                ? description.slice(0, 100) + "..."
+                : description
+            }
+          </p>
+        </a>
+      </div>
+`;
     })
     .join("");
 
@@ -200,20 +199,41 @@ document.querySelectorAll(".nav-btn").forEach((btn) => {
 });
 
 // 🔍 Search
-function doSearch() {
-  const query = searchInput.value.trim();
+let debounceTimeout;
+
+function doSearch(query) {
   if (!query) return;
 
   currentCategory = "search";
   currentPage = 1;
   moviesContainer.innerHTML = "";
   searchMovies(query, currentPage);
-  searchInput.value = "";
 }
 
-searchBtn.addEventListener("click", doSearch);
+// Event handler with debouncing
+function handleSearchInput(e) {
+  const query = e.target.value.trim();
+
+  if (query) {
+    clearTimeout(debounceTimeout); // reset previous timer
+    debounceTimeout = setTimeout(() => {
+      doSearch(query);
+    }, 500); // wait 500ms after user stops typing
+  }
+}
+
+// Search button click (still works immediately)
+searchBtn.addEventListener("click", () => doSearch(searchInput.value.trim()));
+
+// Input typing with debounce
+searchInput.addEventListener("input", handleSearchInput);
+
+// Optional: Enter key triggers immediate search
 searchInput.addEventListener("keypress", (e) => {
-  if (e.key === "Enter") doSearch();
+  if (e.key === "Enter") {
+    clearTimeout(debounceTimeout); // cancel pending debounce
+    doSearch(searchInput.value.trim());
+  }
 });
 
 // 🧩 Init
