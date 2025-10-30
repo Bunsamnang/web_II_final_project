@@ -24,13 +24,13 @@
       >
 
       <!-- Search bar -->
-      <div class="relative w-full w-40 sm:w-72 flex gap-2">
+      <div class="relative w-full sm:w-72 flex gap-2">
         <!-- Input with search icon inside -->
         <input
           id="searchInput"
           type="text"
           placeholder="Search movies..."
-          class=":w-full bg-gray-800 text-white placeholder-gray-400 border border-gray-700 rounded-md px-2 py-2 focus:outline-none focus:ring-1 focus:ring-blue-500"
+          class="flex-1 sm:flex-none bg-gray-800 text-white placeholder-gray-400 border border-gray-700 rounded-md px-2 py-2 focus:outline-none focus:ring-1 focus:ring-blue-500"
         />
         <!-- Search icon -->
         <button
@@ -49,32 +49,33 @@
         class="nav-btn bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded-lg font-medium transition"
         data-category="popular"
       >
-        Popular
+        🌟 Popular
       </button>
       <button
         class="nav-btn bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded-lg font-medium transition"
         data-category="top_rated"
       >
-        Top Rated
+        🏆 Top Rated
       </button>
       <button
         class="nav-btn bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded-lg font-medium transition"
         data-category="upcoming"
       >
-        Latest
+        🎬 Upcoming
       </button>
       <button
         id="favorites"
         class="nav-btn bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded-lg font-medium transition"
       >
-        Favorites ❤️
+        ❤️ Favorites
       </button>
 
       <a
         href="contact.html"
         class="bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded-lg font-medium transition"
-        >Contact</a
       >
+        📞 Contact
+      </a>
     </nav>
 
     <main class="p-4">
