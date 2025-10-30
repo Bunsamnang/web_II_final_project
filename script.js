@@ -152,7 +152,8 @@ function toggleFavorite(movieData) {
   if (existing) {
     favorites = favorites.filter((m) => m.id !== movieData.id);
   } else {
-    favorites.push(movieData);
+    // the latest favorites get show at the front
+    favorites.unshift(movieData);
   }
 
   localStorage.setItem("favorites", JSON.stringify(favorites));
