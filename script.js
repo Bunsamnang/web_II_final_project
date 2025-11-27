@@ -27,6 +27,7 @@ async function fetchMovies(category = "popular", page = 1, append = false) {
       params: { api_key: API_KEY, page },
     });
     totalPages = data.total_pages;
+    // call renderMovies function to display the movie cards
     renderMovies(data.results, append);
   } catch (err) {
     console.error(err);
