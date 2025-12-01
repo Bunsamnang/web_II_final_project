@@ -15,68 +15,70 @@
   </head>
 
   <body class="bg-gray-800 text-gray-900">
-    <header
-      class="bg-gray-900 text-white p-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4"
-    >
-      <!-- Title -->
-      <h class="text-2xl font-bold"
-        ><a href="/index.html">🎬 Movie Explorer</a></h
+    <div class="sticky top-0 z-50">
+      <header
+        class="bg-gray-900 text-white p-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4"
       >
-
-      <!-- Search bar -->
-      <div class="relative w-full sm:w-72 flex gap-2">
-        <!-- Input with search icon inside -->
-        <input
-          id="searchInput"
-          type="text"
-          placeholder="Search movies..."
-          class="flex-1 sm:flex-none bg-gray-800 text-white placeholder-gray-400 border border-gray-700 rounded-md px-2 py-2 focus:outline-none focus:ring-1 focus:ring-blue-500"
-        />
-        <!-- Search icon -->
-        <button
-          id="searchBtn"
-          class="cursor-pointer bg-blue-600 p-2 px-3 rounded-md hover:bg-blue-700"
+        <!-- Title -->
+        <h class="text-2xl font-bold"
+          ><a href="/index.html">🎬 Movie Explorer</a></h
         >
-          🔍
+
+        <!-- Search bar -->
+        <div class="relative w-full sm:w-72 flex gap-2">
+          <!-- Input with search icon inside -->
+          <input
+            id="searchInput"
+            type="text"
+            placeholder="Search movies..."
+            class="flex-1 sm:flex-none bg-gray-800 text-white placeholder-gray-400 border border-gray-700 rounded-md px-2 py-2 focus:outline-none focus:ring-1 focus:ring-blue-500"
+          />
+          <!-- Search icon -->
+          <button
+            id="searchBtn"
+            class="cursor-pointer bg-blue-600 p-2 px-3 rounded-md hover:bg-blue-700"
+          >
+            🔍
+          </button>
+        </div>
+      </header>
+
+      <nav
+        class="bg-gray-800 text-white flex flex-wrap justify-center gap-3 py-3"
+      >
+        <button
+          class="nav-btn bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded-lg font-medium transition"
+          data-category="popular"
+        >
+          🌟 Popular
         </button>
-      </div>
-    </header>
+        <button
+          class="nav-btn bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded-lg font-medium transition"
+          data-category="top_rated"
+        >
+          🏆 Top Rated
+        </button>
+        <button
+          class="nav-btn bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded-lg font-medium transition"
+          data-category="upcoming"
+        >
+          🎬 Upcoming
+        </button>
+        <button
+          id="favorites"
+          class="nav-btn bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded-lg font-medium transition"
+        >
+          ❤️ Favorites
+        </button>
 
-    <nav
-      class="bg-gray-800 text-white flex flex-wrap justify-center gap-3 py-3"
-    >
-      <button
-        class="nav-btn bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded-lg font-medium transition"
-        data-category="popular"
-      >
-        🌟 Popular
-      </button>
-      <button
-        class="nav-btn bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded-lg font-medium transition"
-        data-category="top_rated"
-      >
-        🏆 Top Rated
-      </button>
-      <button
-        class="nav-btn bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded-lg font-medium transition"
-        data-category="upcoming"
-      >
-        🎬 Upcoming
-      </button>
-      <button
-        id="favorites"
-        class="nav-btn bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded-lg font-medium transition"
-      >
-        ❤️ Favorites
-      </button>
-
-      <a
-        href="contact.html"
-        class="bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded-lg font-medium transition"
-      >
-        📞 Contact
-      </a>
-    </nav>
+        <a
+          href="contact.html"
+          class="bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded-lg font-medium transition"
+        >
+          📞 Contact
+        </a>
+      </nav>
+    </div>
 
     <main class="p-4">
       <div
